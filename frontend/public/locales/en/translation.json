@@ -1,0 +1,13 @@
+{
+  "navbar": {
+    "main": "Main",
+    "about": "About"
+  },
+  "sidebar": {
+    "toggle": "Toggle"
+  },
+  "error_boundary": {
+    "message": "Unexpected error",
+    "button": "Reload"
+  }
+}

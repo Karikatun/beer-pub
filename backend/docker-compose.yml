@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    image: node:18.20-alpine3.20
+    build: 
+      context: ./
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=beer_reviews
+      - PGHOST=db
+      - PGPORT=5432
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+      - PGDATABASE=beer_reviews
+    networks:
+      - app-network
+
+  db:
+    image: postgres:16-alpine3.20
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: beer_reviews
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    ports:
+      - "5432:5432"
+
+networks:
+  app-network:
+
+volumes:
+  db-data:

@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "ESNext",
+    "target": "es5",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "react": ["node_modules/@types/react"],
+      "providers/*": ["./src/app/providers/*"],
+      "*": ["./src/*"],
+    }
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+  "plugins": [
+    {
+      "name": "typescript-plugin-css-modules"
+    }
+  ],
+  "exclude": [
+    "node_modules", "config", ".git"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "src/app/types/global.d.ts",
+    "./config/jest/setupTests.ts",
+    "./config/**/*.*"
+  ],
+  "files": ["src/app/types/global.d.ts"]
+}
