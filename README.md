@@ -8,3 +8,4 @@
 ```
 docker-compose up --build
 ```
+3. Visit http://localhost:3000
