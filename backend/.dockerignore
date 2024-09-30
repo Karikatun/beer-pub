@@ -1,0 +1,17 @@
+Dockerfile
+docker-compose.yml
+
+**/*.lnk
+
+# Исключение node_modules
+node_modules
+
+# Исключение скрытых файлов и директорий
+.*
+
+# Исключаем логи и временные файлы
+npm-debug.log
+yarn-error.log
+logs
+*.log
+tmp

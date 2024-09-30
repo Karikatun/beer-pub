@@ -16,7 +16,7 @@ const pool = new Pool({
   user: process.env.PGUSER || 'postgres',
   host: process.env.PGHOST || 'localhost',
   database: process.env.PGDATABASE || 'beer_reviews',
-  password: process.env.PGPASSWORD || 'postgres', // Замените на ваш пароль
+  password: process.env.PGPASSWORD || 'postgres',
   port: parseInt(process.env.PGPORT, 10) || 5432,
 });
 

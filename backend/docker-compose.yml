@@ -11,7 +11,8 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -32,11 +33,15 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: beer_reviews
     volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
       - db-data:/var/lib/postgresql/data
     networks:
       - app-network
-    ports:
-      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d beer_reviews"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 networks:
   app-network:
