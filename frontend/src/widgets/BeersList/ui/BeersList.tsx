@@ -21,16 +21,16 @@ export const BeersList = () => {
   return (
     <Box sx={{ overflow: 'auto', flex: 1 }}>
       <Grid2 container spacing={1} sx={{ marginBottom: '20px', flex: 1 }}>
-        {beers.map(({ name, style, alcohol, bitter, sweet, sour, description }) => {
+        {beers.map(({ name, style, abv, bitter, sweet, sour, description }) => {
           const filterItems = [
-            { label: 'Alc%', value: alcohol },
+            { label: 'Alc%', value: abv },
             { label: 'Горечь', value: bitter },
             { label: 'Сладость', value: sweet },
             { label: 'Кислотность', value: sour }
           ];
 
           return (
-            <Grid2 size={6} sx={{ display: 'flex' }}>
+            <Grid2 size={6} sx={{ display: 'flex', cursor: 'pointer' }}>
               <Card sx={{ flex: 1 }}>
                 <CardContent>
                   <Typography variant='h5'>{name}</Typography>

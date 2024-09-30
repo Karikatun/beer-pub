@@ -15,7 +15,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const filterFields = [
   { label: 'Название', value: 'name' },
-  { label: 'Алкоголь, %', value: 'alcohol' },
+  { label: 'Алкоголь, %', value: 'abv' },
   { label: 'Горечь', value: 'bitter' },
   { label: 'Тип', value: 'style' },
   { label: 'Кислотность', value: 'sour' },
