@@ -4,9 +4,6 @@ FROM node:18.20-alpine3.20
 # Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
 
-# Сбрасываем реестр NPM на стандартный
-RUN npm config set registry https://registry.npmjs.org/
-
 # Копируем package.json и yarn.lock
 COPY package*.json yarn.lock ./
 
@@ -15,7 +12,7 @@ COPY . .
 
 # Устанавливаем nodemon глобально
 RUN npm install -g nodemon
-RUN yarn set version stable
+RUN yarn set version 4.5.0
 RUN yarn install
 
 # Указываем порт, который будет использоваться

@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json yarn.lock ./
 COPY . .
 
-RUN yarn set version stable
+RUN yarn set version 4.5.0
 RUN yarn install
 
 # Указываем порт, который будет использоваться
