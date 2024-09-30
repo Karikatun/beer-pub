@@ -43,26 +43,25 @@ export interface InterfaceBeerState {
 export const fetchBeerStyles = createAsyncThunk(
   'beerStyles',
   async () => {
-    const response = await api.getBeerStyles()
-    return response.data
-  },
-)
+    const response = await api.getBeerStyles();
+    return response.data;
+  }
+);
 
 const initialState = { styles: [], loading: false } as InterfaceBeerState;
 
 export const beerStylesSlice = createSlice({
   name: 'beers',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBeerStyles.fulfilled, (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
       state.styles = action.payload.styles;
-    })
+    });
   }
 });
 
-export const {  } = beerStylesSlice.actions;
+export const { } = beerStylesSlice.actions;
 
 export default beerStylesSlice.reducer;

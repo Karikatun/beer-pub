@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const baseURL = 'http://localhost:3001/api';
 
@@ -8,9 +8,7 @@ class Api {
   public getBeers = async (page: number, sortBy?: string, style?: string) => {
     const url = `${baseURL}/beers`;
     const response = await axios.get(url, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       params: { page, sortBy, style }
     });
 
@@ -19,16 +17,12 @@ class Api {
 
   public getBeerStyles = async () => {
     const url = `${baseURL}/beerStyles`;
-    const response = await axios.get(url, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axios.get(url, { headers: { 'Content-Type': 'application/json' } });
 
     return response;
-  }
+  };
 }
 
 const api = new Api();
 
-export {api};
+export { api };

@@ -44,13 +44,15 @@ export interface InterfaceBeerState {
 
 export const fetchBeers = createAsyncThunk(
   'beers',
-  async ({currentPage, sortBy, style}: {currentPage: number, sortBy?: string, style?: string }) => {
-    const response = await api.getBeers(currentPage, sortBy, style)
-    return response.data
-  },
-)
+  async ({ currentPage, sortBy, style }: {currentPage: number, sortBy?: string, style?: string }) => {
+    const response = await api.getBeers(currentPage, sortBy, style);
+    return response.data;
+  }
+);
 
-const initialState = { beers: [], currentPage: 1, totalPages: 1, loading: false } as InterfaceBeerState;
+const initialState = {
+  beers: [], currentPage: 1, totalPages: 1, loading: false
+} as InterfaceBeerState;
 
 export const beersSlice = createSlice({
   name: 'beers',
@@ -58,7 +60,7 @@ export const beersSlice = createSlice({
   reducers: {
     setCurrentPage: (state, { payload }) => ({
       ...state,
-      currentPage: payload,
+      currentPage: payload
     })
   },
   extraReducers: (builder) => {
@@ -66,7 +68,7 @@ export const beersSlice = createSlice({
       state.beers = action.payload.beers;
       state.currentPage = action.payload.currentPage;
       state.totalPages = action.payload.totalPages;
-    })
+    });
   }
 });
 

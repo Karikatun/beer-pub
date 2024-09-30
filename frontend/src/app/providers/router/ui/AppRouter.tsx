@@ -11,7 +11,7 @@ const AppRouter = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchBeerStyles())
+    dispatch(fetchBeerStyles());
   }, []);
 
   const renderContent = () => (
