@@ -14,7 +14,7 @@ const port = 3001;
 // Настройка подключения к базе данных PostgreSQL
 const pool = new Pool({
   user: process.env.PGUSER || 'postgres',
-  host: process.env.PGHOST || 'localhost',
+  host: process.env.PGHOST || 'db',
   database: process.env.PGDATABASE || 'beer_reviews',
   password: process.env.PGPASSWORD || 'postgres',
   port: parseInt(process.env.PGPORT, 10) || 5432,
