@@ -4,12 +4,12 @@ services:
   backend:
     image: node:18.20-alpine3.20
     build: 
-      context: ./
+      context: ./backend
     ports:
       - '3001:3001'
     volumes:
-      - ./:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./backend:/app
+      - /app/node_modules
     depends_on:
       db:
         condition: service_healthy
@@ -24,6 +24,18 @@ services:
       - PGDATABASE=beer_reviews
     networks:
       - app-network
+
+  frontend:
+    image: node:18.20-alpine3.20
+    build:
+      context: ./frontend
+    ports:
+      - '3000:3000'
+    networks:
+      - app-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
 
   db:
     image: postgres:16-alpine3.20
@@ -45,6 +57,7 @@ services:
 
 networks:
   app-network:
+    driver: bridge
 
 volumes:
   db-data:
