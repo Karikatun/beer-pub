@@ -7,26 +7,26 @@ export interface Beer {
   brewery: string;
   fullBeerName: string;
   description: string;
-  abv: string;
-  minIBU: string;
-  maxIBU: string;
-  Astringency: string;
-  Body: string;
-  Alcohol: string;
-  Bitter: string;
-  Sweet: string;
-  Sour: string;
-  Salty: string;
-  Fruits: string;
-  Hoppy: string;
-  Spices: string;
-  Malty: string;
-  review_aroma: string;
-  review_appearance: string;
-  review_palate: string;
-  review_taste: string;
-  review_overall: string;
-  number_of_reviews: string;
+  abv: number;
+  minIBU: number;
+  maxIBU: number;
+  astringency: number;
+  body: number;
+  alcohol: number;
+  bitter: number;
+  sweet: number;
+  sour: number;
+  salty: number;
+  fruits: number;
+  hoppy: number;
+  spices: number;
+  malty: number;
+  review_aroma: number;
+  review_appearance: number;
+  review_palate: number;
+  review_taste: number;
+  review_overall: number;
+  number_of_reviews: number;
 }
 
 export interface InterfaceBeerStateData {
