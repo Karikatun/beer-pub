@@ -17,11 +17,11 @@ import { Box } from '@mui/material';
 
 const filterFields = [
   {label: 'Название', value: 'name'}, 
-  {label: 'Алкоголь, об.', value: 'Alcohol'}, 
-  {label: 'Горечь', value: 'Bitter'}, 
+  {label: 'Алкоголь, об.', value: 'alcohol'}, 
+  {label: 'Горечь', value: 'bitter'}, 
   {label: 'Тип', value: 'style'}, 
-  {label: 'Кислотность', value: 'Sour'}, 
-  {label: 'Сладость', value: 'Sweet'}
+  {label: 'Кислотность', value: 'sour'}, 
+  {label: 'Сладость', value: 'sweet'}
 ]
 
 const MainPage = () => {

@@ -2,25 +2,20 @@
 FROM node:18.20-alpine3.20
 
 # Устанавливаем рабочую директорию внутри контейнера
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Копируем package.json и package-lock.json
-COPY package*.json ./
-
-# Устанавливаем зависимости
-# RUN apk add --no-cache --virtual .gyp python3 make g++ \
-#     && npm install \
-#     && apk del .gyp
-
-# Устанавливаем nodemon глобально
-RUN npm install -g nodemon \
-    && npm install
+# Копируем package.json и yarn.lock
+COPY package*.json yarn.lock ./
 
 # Копируем исходный код приложения
 COPY . .
 
+# Устанавливаем nodemon глобально
+RUN npm install -g nodemon
+RUN yarn set version 4.5.0
+RUN yarn install
+
 # Указываем порт, который будет использоваться
 EXPOSE 3001
 
-# Определяем команду запуска приложения
 CMD [ "npm", "run", "dev" ]
