@@ -11,5 +11,3 @@ RUN yarn set version 4.5.0 \
 
 # Указываем порт, который будет использоваться
 EXPOSE 3000
-
-CMD [ "yarn", "start" ]

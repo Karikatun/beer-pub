@@ -21,6 +21,31 @@ class Api {
 
     return response;
   };
+
+  public getBeerImage = async (id: number, name: string, description: string, style: string) => { 
+    const url = `${baseURL}/beer/${id}/image`;
+    const response = await axios.post(
+      url,
+      {
+        headers: { 'Content-Type': 'application/json' },
+        data: { name, description, style }
+      }
+    );
+
+    return response;
+  }
+
+  public getBeerItem = async (id: number) => {
+    const url = `${baseURL}/beer/${id}`;
+    const response = await axios.get(
+      url,
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+
+    return response;
+  }
 }
 
 const api = new Api();

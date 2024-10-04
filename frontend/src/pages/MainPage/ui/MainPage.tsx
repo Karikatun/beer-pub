@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const filterFields = [
+  { label: 'ID', value: 'id' },
   { label: 'Название', value: 'name' },
   { label: 'Алкоголь, %', value: 'abv' },
   { label: 'Горечь', value: 'bitter' },
@@ -66,6 +67,7 @@ const MainPage = () => {
           <Select labelId='filter-by-label'
                   id='filter-by-label-id'
                   value={filter.value}
+                  label='Сортировать по'
                   onChange={handleChangeSortField}>
             {filterFields.map(field => (
               <MenuItem key={field.value} value={field.value}>{field.label}</MenuItem>
@@ -78,6 +80,7 @@ const MainPage = () => {
           <Select labelId='filter-by-style'
                   id='filter-by-style-id'
                   value={style}
+                  label='Тип'
                   onChange={handleChangeStyleField}>
             <MenuItem key='emptyItem'>Все</MenuItem>
             {styles.map(item => (

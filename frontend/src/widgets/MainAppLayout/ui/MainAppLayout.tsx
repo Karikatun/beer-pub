@@ -4,6 +4,7 @@ import { classNames } from 'shared/lib/classNames';
 
 import { Navbar } from 'widgets/Navbar';
 
+import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
 import cls from './MainAppLayout.module.scss';
@@ -15,11 +16,11 @@ interface MainAppLayoutProps {
 }
 
 export const MainAppLayout = ({ className }: MainAppLayoutProps) => (
-  <div className={classNames(cls.app, {}, [className])}>
+  <Box className={classNames(cls.app, {}, [className])}>
     <Navbar />
     <Toolbar variant='dense' />
-    <div className={classNames('content-wrapper')}>
+    <Box className={classNames('content-wrapper')}>
       <Outlet />
-    </div>
-  </div>
+    </Box>
+  </Box>
 );

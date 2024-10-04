@@ -27,6 +27,7 @@ export interface Beer {
   review_taste: number;
   review_overall: number;
   number_of_reviews: number;
+  id: number;
 }
 
 export interface InterfaceBeerStateData {
