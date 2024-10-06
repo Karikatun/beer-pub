@@ -10,6 +10,7 @@ import { classNames } from 'shared/lib/classNames';
 import { AppRouter } from 'providers/router';
 import { useTheme } from 'providers/ThemeProvider';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Overlays } from 'widgets/Overlays/ui/Overlays';
 
 const App = () => {
   const { theme } = useTheme();
@@ -21,6 +22,7 @@ const App = () => {
           <PersistGate loading={null} persistor={persistor}>
             <CssBaseline />
             <AppRouter />
+            <Overlays />
           </PersistGate>
         </Provider>
       </Suspense>

@@ -9,19 +9,14 @@ services:
       - '3001:3001'
     volumes:
       - ./backend:/app
-      # - /app/node_modules
+      - /app/node_modules
+    command: yarn dev
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=beer_reviews
-      - PGHOST=db
-      - PGPORT=5432
-      - PGUSER=postgres
-      - PGPASSWORD=postgres
-      - PGDATABASE=beer_reviews
+    env_file:
+      - .env
+      - db.env
     networks:
       - app-network
 
@@ -33,24 +28,25 @@ services:
       - '3000:3000'
     networks:
       - app-network
+    command: yarn start
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    env_file:
+      - front.env
 
   db:
     image: postgres:16-alpine3.20
     restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: beer_reviews
+    env_file:
+      - db.env
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
       - db-data:/var/lib/postgresql/data
     networks:
       - app-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d beer_reviews"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d beer_pub"]
       interval: 5s
       timeout: 5s
       retries: 5

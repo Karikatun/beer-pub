@@ -12,10 +12,14 @@ import Grid2 from '@mui/material/Grid2';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import SwapVert from '@mui/icons-material/SwapVert';
 
 const filterFields = [
+  { label: 'ID', value: 'id' },
+  { label: 'Рейтинг', value: 'review_overall' },
   { label: 'Название', value: 'name' },
-  { label: 'Алкоголь, %', value: 'alcohol' },
+  { label: 'Алкоголь, %', value: 'abv' },
   { label: 'Горечь', value: 'bitter' },
   { label: 'Тип', value: 'style' },
   { label: 'Кислотность', value: 'sour' },
@@ -25,6 +29,7 @@ const filterFields = [
 const MainPage = () => {
   const [filter, setFilterValue] = useState(filterFields[0]);
   const [style, setStyle] = useState();
+  const [sortOrder, setSortOrder] = useState('desc');
 
   const dispatch = useAppDispatch();
 
@@ -32,8 +37,8 @@ const MainPage = () => {
   const { styles } = useAppSelector(state => state.beerStyles);
 
   useEffect(() => {
-    dispatch(fetchBeers({ currentPage, sortBy: filter.value, style }));
-  }, [currentPage]);
+    dispatch(fetchBeers({ currentPage, sortBy: filter.value, style, sortOrder }));
+  }, [currentPage, sortOrder]);
 
   const handleChangePage = (_: React.ChangeEvent<unknown>, value: number) => {
     dispatch(setCurrentPage(value));
@@ -43,7 +48,7 @@ const MainPage = () => {
     setFilterValue(child.props);
 
     if (currentPage === 1) {
-      dispatch(fetchBeers({ currentPage, sortBy: child.props.value, style }));
+      dispatch(fetchBeers({ currentPage, sortBy: child.props.value, style, sortOrder }));
     } else {
       dispatch(setCurrentPage(1));
     }
@@ -52,7 +57,7 @@ const MainPage = () => {
   const handleChangeStyleField = (_: SelectChangeEvent<string>, child?: any) => {
     setStyle(child.props.value);
     if (currentPage === 1) {
-      dispatch(fetchBeers({ currentPage, sortBy: filter.value, style: child.props.value }));
+      dispatch(fetchBeers({ currentPage, sortBy: filter.value, style: child.props.value, sortOrder }));
     } else {
       dispatch(setCurrentPage(1));
     }
@@ -66,6 +71,7 @@ const MainPage = () => {
           <Select labelId='filter-by-label'
                   id='filter-by-label-id'
                   value={filter.value}
+                  label='Сортировать по'
                   onChange={handleChangeSortField}>
             {filterFields.map(field => (
               <MenuItem key={field.value} value={field.value}>{field.label}</MenuItem>
@@ -78,6 +84,7 @@ const MainPage = () => {
           <Select labelId='filter-by-style'
                   id='filter-by-style-id'
                   value={style}
+                  label='Тип'
                   onChange={handleChangeStyleField}>
             <MenuItem key='emptyItem'>Все</MenuItem>
             {styles.map(item => (
@@ -85,6 +92,7 @@ const MainPage = () => {
             ))}
           </Select>
         </FormControl>
+        <Button onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}><SwapVert /></Button>
       </Grid2>
       <BeersList />
       <Pagination count={totalPages} defaultPage={currentPage} onChange={handleChangePage} sx={{ mb: 2, mt: 1 }} />

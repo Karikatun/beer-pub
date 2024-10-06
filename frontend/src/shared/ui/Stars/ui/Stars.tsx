@@ -7,20 +7,16 @@ import { Navbar } from 'widgets/Navbar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
-import cls from './MainAppLayout.module.scss';
+import cls from './Stars.module.scss';
 
 import 'app/styles/index.scss';
 
 interface MainAppLayoutProps {
   className?: string;
+  rating: number;
 }
 
-export const MainAppLayout = ({ className }: MainAppLayoutProps) => (
-  <Box className={classNames(cls.app, {}, [className])}>
-    <Navbar />
-    <Toolbar variant='dense' />
-    <Box className={classNames('content-wrapper')}>
-      <Outlet />
-    </Box>
-  </Box>
+export const Stars = ({ className, rating }: MainAppLayoutProps) => (
+  <div className={classNames(cls.stars, {}, [className])} style={{ '--rating': rating } as React.CSSProperties}>
+  </div>
 );

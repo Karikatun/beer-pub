@@ -5,13 +5,15 @@ import storage from 'redux-persist/lib/storage';
 import userSlice from 'app/store/slices/user';
 import beersSlice from 'app/store/slices/beers';
 import beerStylesSlice from './slices/beerStyles';
+import beerModalSlice from './slices/beerModal';
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  whitelist: ['user', 'beers', 'beerStyles']
 };
 
-const rootReducer = combineReducers({ user: userSlice, beers: beersSlice, beerStyles: beerStylesSlice });
+const rootReducer = combineReducers({ user: userSlice, beers: beersSlice, beerStyles: beerStylesSlice, beerModal: beerModalSlice });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -11,11 +11,8 @@ COPY package*.json yarn.lock ./
 COPY . .
 
 # Устанавливаем nodemon глобально
-RUN npm install -g nodemon \
-    && yarn set version 4.5.0 \
+RUN yarn set version 4.5.0 \
     && yarn install
 
 # Указываем порт, который будет использоваться
 EXPOSE 3001
-
-CMD [ "npm", "run", "dev" ]
