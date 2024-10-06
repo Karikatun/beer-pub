@@ -25,7 +25,7 @@ export interface Beer {
   review_appearance: number;
   review_palate: number;
   review_taste: number;
-  review_overall: number;
+  review_overall: string;
   number_of_reviews: number;
   id: number;
 }
@@ -45,8 +45,8 @@ export interface InterfaceBeerState {
 
 export const fetchBeers = createAsyncThunk(
   'beers',
-  async ({ currentPage, sortBy, style }: {currentPage: number, sortBy?: string, style?: string }) => {
-    const response = await api.getBeers(currentPage, sortBy, style);
+  async ({ currentPage, sortBy, style, sortOrder }: {currentPage: number, sortBy?: string, style?: string, sortOrder: string }) => {
+    const response = await api.getBeers({ page: currentPage, sortBy, style, sortOrder });
     return response.data;
   }
 );

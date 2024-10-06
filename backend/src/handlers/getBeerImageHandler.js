@@ -29,7 +29,7 @@ function getBeerImageHandler() {
         }
 
         // Генерация промпта для создания картинки (длина строки итоговой не должна превышать 500 символов)
-        const imagePrompt = `A photo of '${style}' named '${name}' and description: ${description || ''}`.substring(0, 500);
+        const imagePrompt = `A photo of '${style}' named '${name}' and description: ${description || ''}`.substring(0, 490);
 
         // Если нет токена, или он просрочен, делаем запрос на получение токена
         if (!yaToken?.iamToken || new Date() > new Date(yaToken?.expiresAt)) {
@@ -68,6 +68,10 @@ function getBeerImageHandler() {
         // Получаем JSON-ответ
         const generationRequest = await imageGenerationRequest.json();
 
+        if (!imageGenerationRequest.ok) {
+          return h.response('Ошибка генерации изображения ' + generationRequest?.error).code(500).type('text/plain');
+        }
+
         // Извлекаем id операции
         const idRequest = generationRequest?.id;
 
@@ -85,12 +89,12 @@ function getBeerImageHandler() {
             }
           )
 
-          if (!response.ok) {
-            return h.response('Ошибка генерации изображения').code(500).type('text/plain');
-          }
-
           // Получаем JSON-ответ
           const data = await response.json();
+
+          if (!response.ok) {
+            return h.response('Ошибка получения результата генерации изображения ' + data?.error).code(500).type('text/plain');
+          }
 
           const image = data?.response.image;
 
@@ -107,7 +111,7 @@ function getBeerImageHandler() {
           .type('application/json');
         }
       } else {
-        return h.response('Ошибка сервера').code(500).type('text/plain');
+        return h.response('Ошибка при получении картинки').code(401).type('text/plain');
       }
     } catch (error) {
       console.error('Ошибка при получении картинки', error);

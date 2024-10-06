@@ -11,9 +11,17 @@ FOLDER_ID=""
 ```
 Fill in [YANDEX_OAUTH](https://yandex.cloud/ru/docs/iam/concepts/authorization/iam-token) and [FOLDER_ID](https://yandex.cloud/ru/docs/resource-manager/operations/folder/get-id#console_1)
 
+3. Create db.env file in the root directory
+```
+POSTGRES_PASSWORD=postgres
+POSTGRES_USER=postgres
+POSTGRES_DB=beer_pub
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+```
 
-3. Run project
+4. Run project
 ```
 docker-compose up --build
 ```
-4. Visit http://localhost:3000
+5. Visit http://localhost:3000

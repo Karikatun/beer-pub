@@ -3,11 +3,16 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/store/hooks";
 import { fetchBeerItem, removeBeerIdModal } from "app/store/slices/beerModal";
 
+import { api } from "app/network/api";
+
+import { BeerHeader } from "shared/ui/BeerHeader";
+import { FilterItems } from "shared/ui/FilterItems";
+import { Stars } from "shared/ui/Stars";
+
 import Box from "@mui/material/Box";
 import Grid2 from "@mui/material/Grid2";
-import Modal from "@mui/material/Modal"
+import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import { api } from "app/network/api";
 import Skeleton from "@mui/material/Skeleton";
 
 
@@ -24,6 +29,11 @@ const style = {
   p: 4,
 };
 
+/**
+  * Компонент для отображения подробной информации о напитке в модальном окне.
+  * @param {number} id - ID напитка.
+  * @returns Элемент JSX с модальным окном, содержащим подробную информацию о напитке.
+*/
 const BeerItemModal = ({ id }: { id: number }) => {
   const [image, setImage] = useState('');
   const dispatch = useAppDispatch();
@@ -42,15 +52,14 @@ const BeerItemModal = ({ id }: { id: number }) => {
     dispatch(removeBeerIdModal())
   };
 
-  const renderSortingItem = ({ label, value }: Record<string, string | number>) => (
-    <Grid2 sx={{
-      display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #ccc', px: 1
-    }}>
-      <Typography variant='subtitle2'>
-        {label} {value}
-      </Typography>
-    </Grid2>
-  );
+  const renderRatingItem = (label: string, rating: number) => {
+    return (
+      <Grid2 container direction='row' alignItems='center'>
+        <Typography variant='subtitle2'>{label}: {(+rating).toFixed(2)}</Typography>
+        <Stars rating={rating} />
+      </Grid2>
+    )
+  }
 
   const renderLoader = () => {
     return (
@@ -63,14 +72,13 @@ const BeerItemModal = ({ id }: { id: number }) => {
       return <></>
     }
     
-    const { name, style, abv, bitter, sweet, sour, description, brewery } = item;
+    const { name, style, description, brewery, review_appearance, review_taste, review_aroma } = item;
 
-    const filterItems = [
-      { label: 'Alc%', value: abv },
-      { label: 'Горечь', value: bitter },
-      { label: 'Сладость', value: sweet },
-      { label: 'Кислотность', value: sour }
-    ];
+    const ratingItems = [
+      {label: 'Внешний вид', value: review_appearance },
+      {label: 'Вкус', value: review_taste },
+      {label: 'Аромат', value: review_aroma }
+    ]
 
     return (
       <Grid2 container spacing={2} direction='column'>
@@ -82,13 +90,15 @@ const BeerItemModal = ({ id }: { id: number }) => {
               <Skeleton variant="rectangular" height='100%' sx={{ flex: 1 }} />
             )}
           </Grid2>
-          <Grid2 container spacing={0.5} direction='column'>
-            <Typography variant='h5'>{name}</Typography>
+          <Grid2 container spacing={0.5} direction='column' flex={1}>
+            <BeerHeader beer={item} />
+
             <Typography variant='subtitle2'>Тип: {style}</Typography>
             <Typography variant='subtitle2'>Пивоварня: {brewery}</Typography>
-            <Grid2 container spacing={1} sx={{ my: 0.5 }}>
-              {filterItems.map(item => renderSortingItem(item))}
-            </Grid2>
+
+            {ratingItems.map(item => renderRatingItem(item.label, item.value))}
+
+            <FilterItems beer={item} />
           </Grid2>
         </Grid2>
         <Typography>

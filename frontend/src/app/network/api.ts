@@ -5,11 +5,11 @@ const baseURL = 'http://localhost:3001/api';
 export const apiInstanse = axios.create();
 
 class Api {
-  public getBeers = async (page: number, sortBy?: string, style?: string) => {
+  public getBeers = async ({ page, sortBy, style, sortOrder }: { page: number, sortBy?: string, style?: string, sortOrder?: string} ) => {
     const url = `${baseURL}/beers`;
     const response = await axios.get(url, {
       headers: { 'Content-Type': 'application/json' },
-      params: { page, sortBy, style }
+      params: { page, sortBy, style, sortOrder }
     });
 
     return response;
