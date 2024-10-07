@@ -127,6 +127,7 @@ module.exports = {
   
     globals: {
       '__IS_DEV__': true,
+      'ENABLE_AI_IMAGES': true,
     },
   
     ignorePatterns: ['babel.config.js', 'jest.config.ts', 'webpack.config.ts', '.eslintrc.js', 'build/*'],

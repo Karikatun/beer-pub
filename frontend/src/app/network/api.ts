@@ -22,13 +22,13 @@ class Api {
     return response;
   };
 
-  public getBeerImage = async (id: number, name: string, description: string, style: string) => { 
+  public getBeerImage = async ({ id, name, description, style, brewery }: {id: number, name: string, description: string, style: string, brewery: string}) => { 
     const url = `${baseURL}/beer/${id}/image`;
     const response = await axios.post(
       url,
       {
         headers: { 'Content-Type': 'application/json' },
-        data: { name, description, style }
+        data: { name, description, style, brewery }
       }
     );
 

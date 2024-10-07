@@ -11,6 +11,11 @@ FOLDER_ID=""
 ```
 Fill in [YANDEX_OAUTH](https://yandex.cloud/ru/docs/iam/concepts/authorization/iam-token) and [FOLDER_ID](https://yandex.cloud/ru/docs/resource-manager/operations/folder/get-id#console_1)
 
+in plugins.ts set
+```
+ENABLE_AI_IMAGES: JSON.stringify(true)
+```
+
 3. Create db.env file in the root directory
 ```
 POSTGRES_PASSWORD=postgres

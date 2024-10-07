@@ -13,7 +13,7 @@ function getBeersHandler(pool) {
       const style = request.query?.style;
 
       // Собираем базовый запрос
-      let queryText = 'SELECT "name", "style", "abv", "bitter", "sweet", "sour", "description", "id", "review_overall" FROM beers ';
+      let queryText = 'SELECT "name", "style", "abv", "bitter", "sweet", "sour", "description", "id", "review_overall", "brewery" FROM beers ';
       const paramsArr = [];
       let paramIndex = 1;
 

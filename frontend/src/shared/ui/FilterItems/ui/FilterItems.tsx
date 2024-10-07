@@ -19,7 +19,7 @@ export const FilterItems = ({ beer: { abv, bitter, sweet, sour } }: { beer: Beer
   const renderSortingItem = ({ label, value }: Record<string, string | number>) => (
     <Grid2 sx={{
       display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #ccc', px: 1
-    }}>
+    }} key={value}>
       <Typography variant='subtitle2'>
         {label} {value}
       </Typography>

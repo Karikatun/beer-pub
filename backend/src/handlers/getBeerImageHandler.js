@@ -16,7 +16,7 @@ function getBeerImageHandler() {
   return async function (request, h) {
     try {
       if (process.env.YANDEX_OAUTH) {
-        const { name, description, style } = request.payload?.data || {};
+        const { name, description, style, brewery } = request.payload?.data || {};
         const { id } = request.params;
 
         // Если картинка уже есть, возвращаем ее
@@ -29,7 +29,7 @@ function getBeerImageHandler() {
         }
 
         // Генерация промпта для создания картинки (длина строки итоговой не должна превышать 500 символов)
-        const imagePrompt = `A photo of '${style}' named '${name}' and description: ${description || ''}`.substring(0, 490);
+        const imagePrompt = `A photo of '${style}' named '${name}', brewery '${brewery}' and description: ${description || ''}`.substring(0, 500);
 
         // Если нет токена, или он просрочен, делаем запрос на получение токена
         if (!yaToken?.iamToken || new Date() > new Date(yaToken?.expiresAt)) {

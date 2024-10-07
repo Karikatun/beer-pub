@@ -26,7 +26,7 @@ export const Navbar = ({ className }: NavbarProps) => {
       <Toolbar variant='dense'>
         <Box sx={{ display: { sm: 'block' } }}>
           {navItems.map(({ path, label }) => (
-            <Link to={path}>
+            <Link to={path} key={label}>
               <Button key={label} sx={{ color: '#fff' }}>
                 {label}
               </Button>

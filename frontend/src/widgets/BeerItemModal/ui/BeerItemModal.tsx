@@ -41,8 +41,7 @@ const BeerItemModal = ({ id }: { id: number }) => {
 
   const fetchImage = async () => {
     if (item) {
-      const { name, description, style } = item;
-      const response = await api.getBeerImage(id, name, description, style);
+      const response = await api.getBeerImage(item);
   
       setImage(response.data.image);
     }
@@ -54,7 +53,7 @@ const BeerItemModal = ({ id }: { id: number }) => {
 
   const renderRatingItem = (label: string, rating: number) => {
     return (
-      <Grid2 container direction='row' alignItems='center'>
+      <Grid2 container direction='row' alignItems='center' key={label}>
         <Typography variant='subtitle2'>{label}: {(+rating).toFixed(2)}</Typography>
         <Stars rating={rating} />
       </Grid2>
@@ -115,11 +114,11 @@ const BeerItemModal = ({ id }: { id: number }) => {
   }, [id])
 
   useEffect(() => {
-    if (item) fetchImage();
-  }, [item])
+    if (item && ENABLE_AI_IMAGES) fetchImage();
+  }, [item]);
 
   return (
-    <Modal id={`beerItemModal-${id}`} open={true} onClose={handleClose} sx={{ outline: 'none'}}>
+    <Modal id={`beerItemModal-${id}`} key={`beerItemModal-${id}`} open={true} onClose={handleClose} sx={{ outline: 'none'}}>
       <Box sx={style}>
         {loading ? renderLoader() : renderContent()}
       </Box>

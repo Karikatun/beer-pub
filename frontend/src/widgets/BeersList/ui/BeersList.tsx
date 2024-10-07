@@ -31,10 +31,10 @@ export const BeersList = () => {
     <Box sx={{ overflow: 'auto', flex: 1 }}>
       <Grid2 container spacing={1} sx={{ marginBottom: '20px', flex: 1 }}>
         {beers.map((beer) => {
-          const { name, style, description, id, review_overall } = beer;
+          const { style, description, id } = beer;
 
           return (
-            <Grid2 size={6} sx={{ display: 'flex', cursor: 'pointer' }}>
+            <Grid2 size={6} sx={{ display: 'flex', cursor: 'pointer' }} key={id}>
               <Card sx={{ flex: 1 }} onClick={() => openBeerItem(id)}>
                 <CardContent>
                   <BeerHeader beer={beer} />

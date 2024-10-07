@@ -4,8 +4,6 @@ import webpack from 'webpack';
 import { webpackConfig } from './config/webpack/webpackConfig';
 import { BuildPaths, BuildEnv } from './config/webpack/types/config';
 
-
-
 export default (env: BuildEnv) => {
   const paths: BuildPaths = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
